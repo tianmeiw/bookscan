@@ -4,8 +4,8 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 import sqlalchemy as sa
 from app import db
 from app.models import User
-from wtforms import TextAreaField
-from wtforms.validators import Length
+from wtforms import TextAreaField, SubmitField
+from wtforms.validators import Length, DataRequired
 
 
 class LoginForm(FlaskForm):
@@ -38,4 +38,8 @@ class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
     submit = SubmitField('Submit')
+
+class ClearHistoryForm(FlaskForm):
+    submit = SubmitField('Clear History')
+
 

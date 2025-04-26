@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
-    {% endfor %}
+<div style="text-align: center; padding: 40px;">
+    <h1 style="font-size: 2.5em;">Welcome to <span style="color: #4CAF50;">BookSnap</span> 📚</h1>
+    <p style="font-size: 1.2em; max-width: 600px; margin: auto; margin-top: 20px;">
+        BookSnap is a simple tool to help you track your reading journey.
+        Just upload a photo of an ISBN barcode from any book, and we'll automatically detect it, fetch book details, and store it in your personal reading history.
+    </p>
+
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('login') }}">
+            <button style="padding: 12px 24px; font-size: 1em; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Log In Now →
+            </button>
+        </a>
+    </div>
+</div>
 {% endblock %}

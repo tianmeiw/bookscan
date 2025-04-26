@@ -1,32 +1,54 @@
 <html>
     <head>
         {% if title %}
-        <title>{{ title }} - microblog</title>
+        <title>{{ title }} - BookSnap</title>
         {% else %}
-        <title>microblog</title>
+        <title>BookSnap</title>
         {% endif %}
+        
+        <!-- Optional: Add some basic styling for the flash messages -->
+        <style>
+            .flash {
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+            }
+            .flash.info {
+                background-color: #007bff; /* Blue for info messages */
+            }
+            .flash.error {
+                background-color: #dc3545; /* Red for error messages */
+            }
+        </style>
     </head>
     <body>
         <div>
-          Microblog:
-          <a href="{{ url_for('index') }}">Home</a>
-          {% if current_user.is_anonymous %}
-          <a href="{{ url_for('login') }}">Login</a>
-          {% else %}
-          <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-          <a href="{{ url_for('logout') }}">Logout</a>
-          {% endif %}
+            BookSnap:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
         </div>
         <hr>
-        {% with messages = get_flashed_messages() %}
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
         {% endwith %}
+
         {% block content %}{% endblock %}
     </body>
 </html>

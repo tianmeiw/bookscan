@@ -18,9 +18,13 @@ class User(UserMixin,db.Model):
 
     posts: so.WriteOnlyMapped['Post'] = so.relationship(
         back_populates='author')
+    
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
+
     last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc))
+    
+    book_searches = db.relationship('BookSearch', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -62,3 +66,18 @@ class Search(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     user = db.relationship('User', backref=db.backref('searches', lazy='dynamic'))
+
+class BookSearch(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.String(20), index=True)
+    title = db.Column(db.String(256))
+    authors = db.Column(db.String(256))
+    thumbnail = db.Column(db.String(512))
+    description = db.Column(db.Text)
+    published_date = db.Column(db.String(20))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f'<BookSearch {self.title}>'

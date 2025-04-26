@@ -1,0 +1,54 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Flask instance folder and config
+instance/
+*.env
+*.env.*
+config.py
+.env
+
+# Pytest / coverage / test cache
+.coverage
+htmlcov/
+.cache/
+.pytest_cache/
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+.DS_Store
+
+# Uploads
+static/uploads/
+
+# Logs
+*.log
+
+# SQLite or other local DBs
+*.sqlite3
+*.db
+
+# Compiled frontend files (optional)
+*.min.js
+*.min.css
+
+# Migrations (optional, if you want to recreate them fresh)
+migrations/
+
+# Jupyter notebooks (if you're using any)
+*.ipynb
